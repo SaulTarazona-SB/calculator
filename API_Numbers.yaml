@@ -1,0 +1,267 @@
+openapi: 3.0.1
+info:
+  title: API Numbers
+  description: API con funcionalidad de convertir un número en cifras a sus correspondientes palabras, así como realizar cálculos de suma, resta, multiplicación y división de dos números
+  termsOfService: ''
+  contact:
+    name: Saul Ricardo Tarazona García
+    email: saul.tarazona@segurosbolivar.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1/
+    description: Development Server non https
+    #todos los endpoints donde se puede conumir el servicio
+paths:
+  /numeros:
+    get:
+      tags:
+        - numbers
+      description: Pasando una cifra numérica entera positiva, esta será convertida en las palabras que corresponden a la pronuncioación de dicho número en inglés. Esta operación consume el servicio https://www.dataaccess.com/webservicesserver/NumberConversion.wso?WSDL
+      summary: Convierte un número de cifras a palabras
+      operationId: obtenerNumeroEnPalabras
+      parameters:
+        - in: query
+          name: number
+          description: Número que será convertido en palabras
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ObtenernumeroenpalabrasResponse'
+        '400':
+          description: Error en el parámetro indicado
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error or bad calculation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body 
+  /suma:
+    post:
+      tags:
+        - calculator
+      summary: Suma dos números
+      operationId: sumar
+      description: Realiza la suma de dos números enteros
+      parameters: 
+        - in: query
+          name: numA
+          description: Primer número entero a ser sumado
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: numB
+          description: Segundo número entero a ser sumado
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ObtenercalculoResponse'
+        '400':
+          description: Error en los parámetros proporcionados
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error or bad calculation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body 
+  /resta:
+    post:
+      tags:
+        - calculator
+      summary: Resta dos números
+      operationId: restar
+      description: Realiza la resta de dos números enteros
+      parameters: 
+        - in: query
+          name: numA
+          description: Primer número entero a ser sustraido
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: numB
+          description: Segundo número entero a ser sustraido
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ObtenercalculoResponse'
+        '400':
+          description: Error en los parámetros proporcionados
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error or bad calculation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body 
+  /multiplicacion:
+    post:
+      tags:
+        - calculator
+      summary: Multiplica dos números
+      operationId: multiplicar
+      description: Realiza la multiplicación de dos números enteros
+      parameters: 
+        - in: query
+          name: numA
+          description: Primer número entero a ser multiplicado
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: numB
+          description: Segundo número entero a ser multiplicado
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ObtenercalculoResponse'
+        '400':
+          description: Error en los parámetros proporcionados
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error or bad calculation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body 
+  /division:
+    post:
+      tags:
+        - calculator
+      summary: Divide dos números
+      operationId: dividir
+      description: Realiza la división de dos números enteros
+      parameters: 
+        - in: query
+          name: numA
+          description: Numerador de la operación
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: numB
+          description: Denominador de la operación
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ObtenercalculoResponse'
+        '400':
+          description: Error en los parámetros proporcionados
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error or bad calculation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body 
+components:
+  schemas:
+    ObtenernumeroenpalabrasResponse:
+      type: object
+      properties:
+        response:
+          type: string
+      xml:
+        name: ObtenernumeroenpalabrasResponse
+    ObtenercalculoResponse:
+      type: object
+      properties:
+        resultado:
+          type: integer
+          format: int32
+    Error:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+tags:
+  - name: numbers
+    description: Cambio de numeros en cifras a palabras
+  - name: calculator
+    description: Cálculo de suma, resta, multiplicación o división de dos números
