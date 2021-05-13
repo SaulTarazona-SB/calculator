@@ -9,7 +9,7 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 @Primary
 public class CalcularOperacionService extends WebServiceGatewaySupport {
 
-    private final String Endpoint = "http://www.dneonline.com/calculator.asmx";
+    private static final String ENDPOINT = "http://www.dneonline.com/calculator.asmx";
     private final ObjectFactory of = new ObjectFactory();
 
     public ObtenercalculoResponse sumar (int numA, int numB) {
@@ -18,7 +18,7 @@ public class CalcularOperacionService extends WebServiceGatewaySupport {
         suma.setIntA(numA);
         suma.setIntB(numB);
 
-        AddResponse sumaResultado =(AddResponse) getWebServiceTemplate().marshalSendAndReceive(Endpoint, suma, new SoapActionCallback("http://tempuri.org/Add"));
+        AddResponse sumaResultado =(AddResponse) getWebServiceTemplate().marshalSendAndReceive(ENDPOINT, suma, new SoapActionCallback("http://tempuri.org/Add"));
 
         response.setResultado(sumaResultado.getAddResult());
 
@@ -31,7 +31,7 @@ public class CalcularOperacionService extends WebServiceGatewaySupport {
         resta.setIntA(numA);
         resta.setIntB(numB);
 
-        SubtractResponse restaResultado =(SubtractResponse) getWebServiceTemplate().marshalSendAndReceive(Endpoint, resta, new SoapActionCallback("http://tempuri.org/Subtract"));
+        SubtractResponse restaResultado =(SubtractResponse) getWebServiceTemplate().marshalSendAndReceive(ENDPOINT, resta, new SoapActionCallback("http://tempuri.org/Subtract"));
 
         response.setResultado(restaResultado.getSubtractResult());
 
@@ -44,7 +44,7 @@ public class CalcularOperacionService extends WebServiceGatewaySupport {
         multiplicacion.setIntA(numA);
         multiplicacion.setIntB(numB);
 
-        MultiplyResponse multiplicacionResultado =(MultiplyResponse) getWebServiceTemplate().marshalSendAndReceive(Endpoint, multiplicacion, new SoapActionCallback("http://tempuri.org/Multiply"));
+        MultiplyResponse multiplicacionResultado =(MultiplyResponse) getWebServiceTemplate().marshalSendAndReceive(ENDPOINT, multiplicacion, new SoapActionCallback("http://tempuri.org/Multiply"));
 
         response.setResultado(multiplicacionResultado.getMultiplyResult());
 
@@ -57,7 +57,7 @@ public class CalcularOperacionService extends WebServiceGatewaySupport {
         division.setIntA(numA);
         division.setIntB(numB);
 
-        DivideResponse divisionResultado =(DivideResponse) getWebServiceTemplate().marshalSendAndReceive(Endpoint, division, new SoapActionCallback("http://tempuri.org/Divide"));
+        DivideResponse divisionResultado =(DivideResponse) getWebServiceTemplate().marshalSendAndReceive(ENDPOINT, division, new SoapActionCallback("http://tempuri.org/Divide"));
 
         response.setResultado(divisionResultado.getDivideResult());
 
